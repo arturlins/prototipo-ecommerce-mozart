@@ -54,46 +54,46 @@ Desenvolvido como parte de um protótipo de interface moderna.
 
 Texto do fluxo transformado em protótipo (fluxo descrito pelo aluno Gabriel Barros e desenvolvido por Artur Lins):
 
-      0.    Usuário acessa o site ou aplicativo da loja de fitness
-      1.    Usuário navega pelas categorias (ex: musculação, yoga, acessórios, bem-estar)
-      2.    Usuário seleciona um produto
-      3.    Sistema exibe a página do produto (fotos, descrição, preço, avaliações)
-      4.    Usuário escolhe variações do produto (cor, tamanho, nível de resistência etc.)
-      5.    Usuário define a quantidade desejada
-      6.    Usuário adiciona o produto ao carrinho
-      7.    Sistema atualiza o carrinho com o item selecionado
-      8.    Usuário acessa o carrinho de compras
-      9.    Sistema exibe resumo do pedido (produtos, frete, prazo, valor total)
-      10.   Usuário insere CEP para cálculo de frete
-      11.   Sistema consulta transportadora e calcula prazo e valor de entrega
-      12.   Usuário seleciona o tipo de frete
-      13.   Usuário clica em “Finalizar compra”
-      14.   Sistema solicita login ou cadastro
-      15.   Usuário insere e-mail e senha ou cria uma conta
-      16.   Sistema valida os dados do usuário
-      17.   Usuário informa endereço de entrega
-      18.   Sistema salva e valida o endereço
-      19.   Usuário escolhe a forma de pagamento (cartão, Pix, boleto)
-      20.   Sistema exibe resumo final da compra
-      21.   Usuário confirma o pedido
-      22.   Sistema envia os dados para o gateway de pagamento
-      23.   Gateway processa a transação
-      24.   Sistema recebe a aprovação ou recusa do pagamento
-      25.   Sistema gera o número do pedido
-      26.   Sistema envia confirmação da compra por e-mail/notificação
-      27.   Pedido é registrado no sistema da loja
-      28.   Estoque é atualizado automaticamente
-      29.   Equipe de separação recebe a ordem de preparo
-      30.   Produto é separado no estoque
-      31.   Produto passa por conferência
-      32.   Produto é embalado
-      33.   Nota fiscal é emitida
-      34.   Pedido é entregue à transportadora
-      35.   Código de rastreio é gerado
-      36.   Cliente recebe o código de rastreio
-      37.   Transportadora realiza a entrega
-      38.   Sistema atualiza status para “Entregue”
-      39.   Cliente recebe notificação de entrega concluída
-      40.   Sistema envia solicitação de avaliação do produto
-      41.   Processo de venda é finalizado
+0. Usuário acessa o site ou aplicativo da loja de fitness
+1. Usuário navega pelas categorias (ex: musculação, yoga, acessórios, bem-estar)
+2. Usuário seleciona um produto
+3. Sistema exibe a página do produto (fotos, descrição, preço, avaliações)
+4. Usuário escolhe variações do produto (cor, tamanho, nível de resistência etc.)
+5. Usuário define a quantidade desejada
+6. Usuário adiciona o produto ao carrinho
+7. Sistema atualiza o carrinho com o item selecionado
+8. Usuário acessa o carrinho de compras
+9. Sistema exibe resumo do pedido (produtos, frete, prazo, valor total)
+10. Usuário insere CEP para cálculo de frete
+11. Sistema consulta transportadora e calcula prazo e valor de entrega
+12. Usuário seleciona o tipo de frete
+13. Usuário clica em “Finalizar compra”
+14. Sistema solicita login ou cadastro
+15. Usuário insere e-mail e senha ou cria uma conta
+16. Sistema valida os dados do usuário
+17. Usuário informa endereço de entrega
+18. Sistema salva e valida o endereço
+19. Usuário escolhe a forma de pagamento (cartão, Pix, boleto)
+20. Sistema exibe resumo final da compra
+21. Usuário confirma o pedido
+22. Sistema envia os dados para o gateway de pagamento
+23. Gateway processa a transação
+24. Sistema recebe a aprovação ou recusa do pagamento
+25. Sistema gera o número do pedido
+26. Sistema envia confirmação da compra por e-mail/notificação
+27. Pedido é registrado no sistema da loja
+28. Estoque é atualizado automaticamente
+29. Equipe de separação recebe a ordem de preparo
+30. Produto é separado no estoque
+31. Produto passa por conferência
+32. Produto é embalado
+33. Nota fiscal é emitida
+34. Pedido é entregue à transportadora
+35. Código de rastreio é gerado
+36. Cliente recebe o código de rastreio
+37. Transportadora realiza a entrega
+38. Sistema atualiza status para “Entregue”
+39. Cliente recebe notificação de entrega concluída
+40. Sistema envia solicitação de avaliação do produto
+41. Processo de venda é finalizado
 
