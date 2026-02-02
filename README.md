@@ -96,4 +96,3 @@ Texto do fluxo transformado em protótipo (fluxo descrito pelo aluno Gabriel Bar
 39. Cliente recebe notificação de entrega concluída
 40. Sistema envia solicitação de avaliação do produto
 41. Processo de venda é finalizado
-

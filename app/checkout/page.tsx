@@ -14,13 +14,46 @@ export default function CheckoutPage() {
     const { user } = useSession();
     const [paymentMethod, setPaymentMethod] = useState<'card' | 'pix' | 'boleto'>('card');
     const [isProcessing, setIsProcessing] = useState(false);
-
     const [processingStep, setProcessingStep] = useState('');
+    const [error, setError] = useState('');
     const router = useRouter();
+
+    // Mock Data State
+    const [address, setAddress] = useState({
+        cep: '57035-400',
+        street: 'Rua das Acacias',
+        number: '123',
+        district: 'Ponta Verde',
+        city: 'Maceió',
+        state: 'AL'
+    });
+
+    const [card, setCard] = useState({
+        number: '1234 5678 1234 5678',
+        name: 'ARTUR LINS',
+        expiry: '12/30',
+        cvv: '123'
+    });
 
     const total = subtotal + shippingCost;
 
     const handlePayment = () => {
+        setError('');
+
+        // Validate Address
+        if (!address.cep || !address.street || !address.number || !address.district || !address.city || !address.state) {
+            setError('Por favor, preencha todos os campos do endereço.');
+            return;
+        }
+
+        // Validate Card
+        if (paymentMethod === 'card') {
+            if (!card.number || !card.name || !card.expiry || !card.cvv) {
+                setError('Por favor, preencha todos os dados do cartão.');
+                return;
+            }
+        }
+
         setIsProcessing(true);
         setProcessingStep('Processando pagamento...');
 
@@ -35,6 +68,14 @@ export default function CheckoutPage() {
                 }, 800);
             }, 800);
         }, 1000);
+    };
+
+    const handleAddressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setAddress({ ...address, [e.target.name]: e.target.value });
+    };
+
+    const handleCardChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setCard({ ...card, [e.target.name]: e.target.value });
     };
 
     return (
@@ -76,30 +117,62 @@ export default function CheckoutPage() {
                                     <label className="mb-1 block text-sm font-medium text-gray-700">CEP</label>
                                     <input
                                         type="text"
+                                        name="cep"
+                                        value={address.cep}
+                                        onChange={handleAddressChange}
                                         className="w-full rounded-lg border-green-500 border-2 bg-green-50/50 p-3 outline-none focus:ring-1 focus:ring-primary"
                                         placeholder="00000-000"
-                                        defaultValue="57000-000" // Mocked based on prompt
                                     />
                                 </div>
                                 <div className="md:col-span-2">
                                     <label className="mb-1 block text-sm font-medium text-gray-700">Rua</label>
-                                    <input type="text" className="w-full rounded-lg border border-gray-300 p-3 outline-none focus:border-primary focus:ring-1 focus:ring-primary" />
+                                    <input
+                                        type="text"
+                                        name="street"
+                                        value={address.street}
+                                        onChange={handleAddressChange}
+                                        className="w-full rounded-lg border border-gray-300 p-3 outline-none focus:border-primary focus:ring-1 focus:ring-primary"
+                                    />
                                 </div>
                                 <div>
                                     <label className="mb-1 block text-sm font-medium text-gray-700">Número</label>
-                                    <input type="text" className="w-full rounded-lg border border-gray-300 p-3 outline-none focus:border-primary focus:ring-1 focus:ring-primary" />
+                                    <input
+                                        type="text"
+                                        name="number"
+                                        value={address.number}
+                                        onChange={handleAddressChange}
+                                        className="w-full rounded-lg border border-gray-300 p-3 outline-none focus:border-primary focus:ring-1 focus:ring-primary"
+                                    />
                                 </div>
                                 <div>
                                     <label className="mb-1 block text-sm font-medium text-gray-700">Bairro</label>
-                                    <input type="text" className="w-full rounded-lg border border-gray-300 p-3 outline-none focus:border-primary focus:ring-1 focus:ring-primary" />
+                                    <input
+                                        type="text"
+                                        name="district"
+                                        value={address.district}
+                                        onChange={handleAddressChange}
+                                        className="w-full rounded-lg border border-gray-300 p-3 outline-none focus:border-primary focus:ring-1 focus:ring-primary"
+                                    />
                                 </div>
                                 <div>
                                     <label className="mb-1 block text-sm font-medium text-gray-700">Cidade</label>
-                                    <input type="text" className="w-full rounded-lg border border-gray-300 p-3 outline-none focus:border-primary focus:ring-1 focus:ring-primary" />
+                                    <input
+                                        type="text"
+                                        name="city"
+                                        value={address.city}
+                                        onChange={handleAddressChange}
+                                        className="w-full rounded-lg border border-gray-300 p-3 outline-none focus:border-primary focus:ring-1 focus:ring-primary"
+                                    />
                                 </div>
                                 <div>
                                     <label className="mb-1 block text-sm font-medium text-gray-700">Estado</label>
-                                    <input type="text" className="w-full rounded-lg border border-gray-300 p-3 outline-none focus:border-primary focus:ring-1 focus:ring-primary" />
+                                    <input
+                                        type="text"
+                                        name="state"
+                                        value={address.state}
+                                        onChange={handleAddressChange}
+                                        className="w-full rounded-lg border border-gray-300 p-3 outline-none focus:border-primary focus:ring-1 focus:ring-primary"
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -146,20 +219,48 @@ export default function CheckoutPage() {
                                     <div className="grid gap-4 animate-in fade-in slide-in-from-left-2">
                                         <div>
                                             <label className="mb-1 block text-sm font-medium text-gray-700">Número do Cartão</label>
-                                            <input type="text" placeholder="0000 0000 0000 0000" className="w-full rounded-lg border border-gray-300 p-3 outline-none focus:border-primary focus:ring-1 focus:ring-primary" />
+                                            <input
+                                                type="text"
+                                                name="number"
+                                                value={card.number}
+                                                onChange={handleCardChange}
+                                                placeholder="0000 0000 0000 0000"
+                                                className="w-full rounded-lg border border-gray-300 p-3 outline-none focus:border-primary focus:ring-1 focus:ring-primary"
+                                            />
                                         </div>
                                         <div>
                                             <label className="mb-1 block text-sm font-medium text-gray-700">Nome no Cartão</label>
-                                            <input type="text" placeholder="Como impresso no cartão" className="w-full rounded-lg border border-gray-300 p-3 outline-none focus:border-primary focus:ring-1 focus:ring-primary" />
+                                            <input
+                                                type="text"
+                                                name="name"
+                                                value={card.name}
+                                                onChange={handleCardChange}
+                                                placeholder="Como impresso no cartão"
+                                                className="w-full rounded-lg border border-gray-300 p-3 outline-none focus:border-primary focus:ring-1 focus:ring-primary"
+                                            />
                                         </div>
                                         <div className="grid grid-cols-2 gap-4">
                                             <div>
                                                 <label className="mb-1 block text-sm font-medium text-gray-700">Validade</label>
-                                                <input type="text" placeholder="MM/AA" className="w-full rounded-lg border border-gray-300 p-3 outline-none focus:border-primary focus:ring-1 focus:ring-primary" />
+                                                <input
+                                                    type="text"
+                                                    name="expiry"
+                                                    value={card.expiry}
+                                                    onChange={handleCardChange}
+                                                    placeholder="MM/AA"
+                                                    className="w-full rounded-lg border border-gray-300 p-3 outline-none focus:border-primary focus:ring-1 focus:ring-primary"
+                                                />
                                             </div>
                                             <div>
                                                 <label className="mb-1 block text-sm font-medium text-gray-700">CVV</label>
-                                                <input type="text" placeholder="123" className="w-full rounded-lg border border-gray-300 p-3 outline-none focus:border-primary focus:ring-1 focus:ring-primary" />
+                                                <input
+                                                    type="text"
+                                                    name="cvv"
+                                                    value={card.cvv}
+                                                    onChange={handleCardChange}
+                                                    placeholder="123"
+                                                    className="w-full rounded-lg border border-gray-300 p-3 outline-none focus:border-primary focus:ring-1 focus:ring-primary"
+                                                />
                                             </div>
                                         </div>
                                     </div>
@@ -196,6 +297,12 @@ export default function CheckoutPage() {
                                     <span>{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(total)}</span>
                                 </div>
                             </div>
+
+                            {error && (
+                                <div className="mt-4 rounded-lg bg-red-50 p-3 text-sm font-medium text-red-500 border border-red-200 animate-in fade-in slide-in-from-top-2">
+                                    {error}
+                                </div>
+                            )}
 
                             <button
                                 onClick={handlePayment}

@@ -13,7 +13,7 @@ export default function CartPage() {
     const { items, updateQuantity, removeFromCart, subtotal, clearCart, setShipping } = useCart();
     const router = useRouter();
 
-    const [cep, setCep] = useState('');
+    const [cep, setCep] = useState('57035-400');
     const [isCalculating, setIsCalculating] = useState(false);
     const [isCalculated, setIsCalculated] = useState(false);
     const [selectedShipping, setSelectedShipping] = useState<string | null>(null);
